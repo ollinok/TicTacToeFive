@@ -5,21 +5,9 @@ import ReactDOM from 'react-dom';
 import Gameboard from './Gameboard.js';
 import './styles/index.css';
 
-const boardHeight = 10;
-const boardWidth = 10;
+const boardHeight = 20;
+const boardWidth = 20;
 class Game extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         squares: Array(boardHeight * boardWidth).fill(null),
-    //     };
-    // }
-
-    // handleClick(i) {
-    //     const squares = this.state.squares.slice();
-    //     squares[i] = 'X';
-    //     this.setState({squares: squares});
-    // }
     winCondition() {
         const he = boardHeight;
         const wi = boardWidth;
@@ -73,15 +61,13 @@ class Game extends React.Component {
     }
 
     render() {
-        const testi = this.winCondition();
+        const winLines = this.winCondition();
         return (
             <div className="game">
-                <p>Length: {testi.length} | {testi[35]}</p>
               <div className="game-board">
                 <Gameboard boardHeight={boardHeight}
                            boardWidth={boardWidth}
-                           //squares=
-                           //onClick={(i) => this.handleClick(i)}
+                           winLines={winLines}
                 />
               </div>
               <div className="game-info">

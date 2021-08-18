@@ -7,7 +7,18 @@ function Square(props) {
         </button>
     );
 }
-
+function calculateWinner(squares, winLines) {
+    for (let i=0;i<winLines.length;i++) {
+        const [a,b,c,d,e] = winLines[i];
+        if (squares[a] && squares[a] === squares[b] &&
+            squares[a] === squares[c] &&
+            squares[a] === squares[d] &&
+            squares[a] === squares[e]) {
+                return squares[a];
+        }
+    }
+    return null;
+}
 class Gameboard extends React.Component {
     constructor(props) {
         super(props);
@@ -19,6 +30,9 @@ class Gameboard extends React.Component {
 
     handleClick(i) {
         const squares = this.state.squares.slice();
+        if (calculateWinner(squares, this.props.winLines) || squares[i]) {
+            return;
+        }
         squares[i] = this.state.turnX ? 'X':'O';
         this.setState({
             squares: squares,
@@ -51,8 +65,16 @@ class Gameboard extends React.Component {
     }
 
     render() {
-        const status = 'Next player: ' + (this.state.turnX ? 'X':'O');
+        //const status = 'Next player: ' + (this.state.turnX ? 'X':'O');
         const board = this.generateBoard();
+
+        const winner = calculateWinner(this.state.squares, this.props.winLines);
+        let status;
+        if (winner) {
+            status = 'Winner: ' + winner;
+        } else {
+            status = 'Next player: ' + (this.state.turnX ? 'X':'O');
+        }
 
         return (
         <div>
