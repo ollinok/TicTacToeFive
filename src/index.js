@@ -3,12 +3,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Gameboard from './Gameboard.js';
+import winCondition from './Logic/WinCondition.js'
 import './styles/index.css';
 
 const boardHeight = 20;
 const boardWidth = 20;
 class Game extends React.Component {
-    winCondition() {
+    /* winCondition() {
         const he = boardHeight;
         const wi = boardWidth;
         const winLines = [];
@@ -58,10 +59,11 @@ class Game extends React.Component {
             }
         }
         return winLines;
-    }
+    } */
 
     render() {
-        const winLines = this.winCondition();
+        //const winLines = this.winCondition();
+        const winLines = winCondition(boardHeight, boardWidth);
         return (
             <div className="game">
               <div className="game-board">
